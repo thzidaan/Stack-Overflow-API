@@ -11,10 +11,17 @@ current_Time = int(time.time())  # Gets Current Time
 # Sets from date for the API request
 week_earlier_time = str(current_Time - seven_days_time)
 
-questions_endpoint = 'https://api.stackexchange.com/2.2/questions'
-most_voted_endpoint = '?pagesize=10&fromdate='+week_earlier_time + \
-    '&order=asc&sort=votes&site=stackoverflow&tagged='
+# post_id == question_id --> Remember
+
+post_endpoint = 'https://api.stackexchange.com/2.2/posts'  # Will be used for comments
+question_endpoint = 'https://api.stackexchange.com/2.2/questions'
+
+
+comment_endpoint = "{ids}/comments?pagesize=100&order=desc&sort=creation&site=stackoverflow"
+most_voted_endpoint = '?pagesize=10&fromdate=' + \
+    week_earlier_time + '&order=asc&sort=votes&site=stackoverflow'
 most_recent_endpoint = '?pagesize=10&order=asc&sort=creation&site=stackoverflow&tagged='
+
 
 questionCollection = {}
 
@@ -23,10 +30,12 @@ questionCollection = {}
 def search():
 
     tag_selected = request.form["tag"]
-    most_voted_request = requests.get(
-        questions_endpoint + most_voted_endpoint + tag_selected)
-    most_recent_request = requests.get(
-        questions_endpoint + most_recent_endpoint + tag_selected)
+
+    most_voted_posts = question_endpoint + most_voted_endpoint + tag_selected
+    most_recent_posts = question_endpoint + most_recent_endpoint + tag_selected
+
+    most_voted_request = requests.get(most_voted_posts)
+    most_recent_request = requests.get(most_recent_posts)
 
     votes_data = dict(json.loads(most_voted_request.content))
     recent_data = dict(json.loads(most_recent_request.content))
@@ -35,7 +44,7 @@ def search():
     total_question_items = total_questions['items']
 
     for item in total_question_items:
-        questionCollection[item['question_id']] = {
+        questionCollection[item['question_id']] = {  # question_id will help us find corresponding comments
             'title': item['title'],
             'votes': item['score'],
             'creation_date': item['creation_date']
