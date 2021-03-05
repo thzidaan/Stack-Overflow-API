@@ -7,7 +7,8 @@ app = Flask(__name__)
 
 # (1615523017 - 1614918217) (March 11 - March 4 ==> 1 week)
 seven_days_time = 604800
-current_Time = int(time.time())
+current_Time = int(time.time())  # Gets Current Time
+# Sets from date for the API request
 week_earlier_time = str(current_Time - seven_days_time)
 
 questions_endpoint = 'https://api.stackexchange.com/2.2/questions'
@@ -40,13 +41,7 @@ def search():
             'creation_date': item['creation_date']
         }
 
-    return questionCollection
-
-  #  if votes_data.get('items') is not None:
-   #     data = votes_data['items']
-    #    for a in range(10):
-
- #  return render_template('index.html', data=newData)
+    return render_template('search.html', data=questionCollection)
 
 
 @ app.route('/')
