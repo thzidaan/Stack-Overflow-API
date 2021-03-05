@@ -6,16 +6,9 @@
 
 <br />
 
-<main role="main">
-  <div class="jumbotron">
-    <div class="col-sm-8 mx-auto">
-      <h1>Welcome To Zidaan's Stack Overflow Crawler !! </h1>
-        <a class="btn btn-primary" href="/form" role="button"
-          >Click to Start Searching &raquo;</a
-        >
-      </p>
-    </div>
-  </div>
-</main>
+<form method="POST" action="/search">
+  Tag Search <input type="text" name="tag" />
+  <input type="submit" />
+</form>
 
-{% endblock %}
+<span>{{data}}</span>{% endblock %}
