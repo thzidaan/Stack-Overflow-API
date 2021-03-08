@@ -29,16 +29,16 @@
 
 {% endblock %} {% block body %}
 
-<h1>Search</h1> 
+<h1>Search Results for Tag: </h1> 
 
 
 
 <div class="container">
   {% for question_number,content in data.items() %}
   <br>
-  <button type="button" class="collapsible">{{content['title']}}</button>
+  <button type="button" class="collapsible">{{content['title']}} Score:{{content['score']}}  Date Created: {{content['creation_date']}}</button>
     <div class="content">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <p>{{content['body']}}</p>
     </div>
   <br>
     
