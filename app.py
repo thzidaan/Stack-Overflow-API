@@ -46,8 +46,8 @@ def search():
     most_voted_request = requests.get(most_voted_search)
     most_recent_request = requests.get(most_recent_search)
 
-    votes_data = dict(json.loads(most_voted_request.content))
-    recent_data = dict(json.loads(most_recent_request.content))
+    votes_data = json.loads(most_voted_request.content)
+    recent_data = json.loads(most_recent_request.content)
 
     all_request_data = [
         votes_data,
@@ -68,73 +68,8 @@ def search():
                     'comments': {},
                     'answers': {}
                 }
-                if item.get('comments') is not None:
-                    # If the question has comments
-                    total_question_comment_item = item['comments']
-                    for question_comment_item in total_question_comment_item:
-                        allDataCollection[item['question_id']] = {
-                            'comments': {
-                                'creation_date': question_comment_item['creation_date'],
-                                'score': question_comment_item['score'],
-                                'body': question_comment_item['body_markdown']
 
-                            }
-                        }
-                if item.get('answers') is not None:     # If the question have answers
-                    total_answer_items = item['answers']
-                    for answer_item in total_answer_items:
-                        allDataCollection[item['question_id']] = {
-                            'answers': {
-                                'creation_date': answer_item['creation_date'],
-                                'score': answer_item['score'],
-                                'body': answer_item['body_markdown'],
-                                'comments': {}
-                            }
-                        }
-
-                        # If the answer itself have comments
-                        if answer_item.get('comments') is not None:
-                            total_answer_comment_item = answer_item['comments']
-                            for answer_comment_item in total_answer_comment_item:
-                                allDataCollection[item['question_id']] = {
-                                    'answers': {
-                                        'comments': {
-                                            'creation_date': answer_comment_item['creation_date'],
-                                            'score': answer_comment_item['score'],
-                                            'body': answer_comment_item['body_markdown']
-
-                                        }
-                                    }
-                                }
-
-    return render_template('test.html', votes_data=votes_data, recent_data=recent_data, totalQ=allDataCollection)
-
-
-@app.route('/search2', methods=['POST'])
-def search2():
-
-    tag_selected = request.form["tag"]
-
-    most_voted_posts = question_endpoint + most_voted_endpoint + tag_selected
-    most_recent_posts = question_endpoint + most_recent_endpoint + tag_selected
-
-    most_voted_request = requests.get(most_voted_posts)
-    most_recent_request = requests.get(most_recent_posts)
-
-    votes_data = dict(json.loads(most_voted_request.content))
-    recent_data = dict(json.loads(most_recent_request.content))
-    total_questions = dict(votes_data, **recent_data)
-
-    total_question_items = total_questions['items']
-
-    for item in total_question_items:
-        questionCollection[item['question_id']] = {  # question_id will help us find corresponding comments
-            'title': item['title'],
-            'votes': item['score'],
-            'creation_date': item['creation_date']
-        }
-
-    return render_template('search.html', data=questionCollection)
+    return render_template('test.html', votes_data=votes_data)
 
 
 @ app.route('/')
