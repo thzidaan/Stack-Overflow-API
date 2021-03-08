@@ -48,57 +48,66 @@ def search():
 
     votes_data = dict(json.loads(most_voted_request.content))
     recent_data = dict(json.loads(most_recent_request.content))
-    total_questions = dict(votes_data, **recent_data)
 
-    total_question_items = total_questions['items']
+    all_request_data = [
+        votes_data,
+        recent_data
+    ]
 
-    if total_question_items is not None:  # If there questions for the tag
-        for item in total_question_items:
-            allDataCollection[item['question_id']] = {
-                'title': item['title'],
-                'score': item['score'],
-                'creation_date': item['creation_date'],
-                'body': item['body_markdown'],
-                'comments': {},
-                'answers': {}
-            }
-            if item.get('comments') is not None:
-                # If the question has comments
-                total_question_comment_item = item['comments']
-                for question_comment_item in total_question_comment_item:
-                    allDataCollection[item['question_id']] = {
-                        'comments': {
-                            'creation_date': question_comment_item['creation_date'],
-                            'score': question_comment_item['score'],
-                            'body': question_comment_item['body_markdown']
+    for request_type in all_request_data:
+        # If there is Questions returned in requests
+        if request_type.get('items') is not None:
+            total_question_items = request_type['items']
 
-                        }
-                    }
-            if item.get('answers') is not None:     # If the question have answers
-                total_answer_items = item['answers']
-                for answer_item in total_answer_items:
-                    allDataCollection[item['question_id']] = {
-                        'answers': {
-                            'creation_date': answer_item['creation_date'],
-                            'score': answer_item['score'],
-                            'body': answer_item['body_markdown'],
-                            'commments': {}
-                        }
-                    }
+            for item in total_question_items:
+                allDataCollection[item['question_id']] = {
+                    'title': item['title'],
+                    'score': item['score'],
+                    'creation_date': item['creation_date'],
+                    'body': item['body_markdown'],
+                    'comments': {},
+                    'answers': {}
+                }
+                if item.get('comments') is not None:
+                    # If the question has comments
+                    total_question_comment_item = item['comments']
+                    for question_comment_item in total_question_comment_item:
+                        allDataCollection[item['question_id']] = {
+                            'comments': {
+                                'creation_date': question_comment_item['creation_date'],
+                                'score': question_comment_item['score'],
+                                'body': question_comment_item['body_markdown']
 
-                    # If the answer itself have comments
-                    if answer_item.get('comments') is not None:
-                        total_answer_comment_item = answer_item['comments']
-                        for answer_comment_item in total_answer_comment_item:
-                            allDataCollection[item['question_id']['answers']] = {
-                                'comments': {
-                                    'creation_date': answer_comment_item['creation_date'],
-                                    'score': answer_comment_item['score'],
-                                    'body': answer_comment_item['body_markdown']
-                                }
                             }
+                        }
+                if item.get('answers') is not None:     # If the question have answers
+                    total_answer_items = item['answers']
+                    for answer_item in total_answer_items:
+                        allDataCollection[item['question_id']] = {
+                            'answers': {
+                                'creation_date': answer_item['creation_date'],
+                                'score': answer_item['score'],
+                                'body': answer_item['body_markdown'],
+                                'commments': {}
+                            }
+                        }
 
-    return render_template('search.html', data=allDataCollection)
+                        # If the answer itself have comments
+                        if answer_item.get('comments') is not None:
+                            total_answer_comment_item = answer_item['comments']
+                            for answer_comment_item in total_answer_comment_item:
+                                allDataCollection[item['question_id']] = {
+                                    'answers': {
+                                        'comments': {
+                                            'creation_date': answer_comment_item['creation_date'],
+                                            'score': answer_comment_item['score'],
+                                            'body': answer_comment_item['body_markdown']
+
+                                        }
+                                    }
+                                }
+
+    return render_template('test.html', votes_data=votes_data, recent_data=recent_data, totalQ=allDataCollection)
 
 
 @app.route('/search2', methods=['POST'])
