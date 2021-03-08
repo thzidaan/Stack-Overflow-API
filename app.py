@@ -88,7 +88,7 @@ def search():
                                 'creation_date': answer_item['creation_date'],
                                 'score': answer_item['score'],
                                 'body': answer_item['body_markdown'],
-                                'commments': {}
+                                'comments': {}
                             }
                         }
 
