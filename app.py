@@ -53,8 +53,8 @@ def search():
 
     tag_selected = request.form["tag"]
 
-    # comments_collection = []
-    # answers_collection = []
+    comments_collection = []
+    answers_collection = []
     questions_collection = []
 
     most_voted_search = search_base_endpoint + most_voted_endpoint + tag_selected
@@ -86,33 +86,43 @@ def search():
                 print('got in loop' + str(item_list))
 
                 if ((request_item.get('items')[item_list]).get('answers')) is not None:
-                    print('got all data' + str(item_list))
-            # # We get all the answers for the current question
-            # all_answers_data = all_data[item_list]['answers']
-            # for answer_list in range(len(all_answers_data)):
-            #     answer_item = all_answers_data[answer_list]
-            # # If answer also have comments
-            #     if (all_answers_data[answer_list].get('comments')) is not None:
-            #         answer_item_comments = all_answers_data[answer_list]['comments']
-            #         for answer_comment_list in range(len(answer_item_comments)):
-            #             # Taking each comment from answers
-            #             answer_comment_item = answer_item_comments[answer_comment_list]
-            #             comments_collection.append({
-            #                 'creation_date': answer_comment_item['creation_date'],
-            #                 'score': answer_comment_item['score'],
-            #                 'body': answer_comment_item['body_markdown']
-            #             })
+                    print('got all answer data' + str(item_list))
+                    # We get all the answers for the current question
+                    all_answers_data = (
+                        (request_item.get('items')[item_list]).get('answers'))
+                    for answer_list in range(len(all_answers_data)):
 
-            #     answers_collection.append({
-            #         'creation_date': answer_item['creation_date'],
-            #         'score': answer_item['score'],
-            #         'body': answer_item['body_markdown'],
-            #         'comments': comments_collection
-            #     })
+                        print('answer data' + str(answer_list))
+                        answer_item = all_answers_data[answer_list]
+                        print('answerItem gotten')
+                        # If answer also have comments
+                        if (((
+                                (request_item.get('items')[item_list]).get('answers'))[answer_list]).get('comments')) is not None:
+                            print('answer comments done')
+                            answer_item_comments = (((
+                                (request_item.get('items')[item_list]).get('answers'))[answer_list]).get('comments'))
+                            for answer_comment_list in range(len(answer_item_comments)):
+                                # Taking each comment from answers
+                                answer_comment_item = answer_item_comments[answer_comment_list]
+                                new_comment = {
+                                    'creation_date': answer_comment_item['creation_date'],
+                                    'score': answer_comment_item['score'],
+                                    'body': answer_comment_item['body_markdown']
+                                }
+                                comments_collection.append(new_comment)
+
+                        new_answer = {
+                            'creation_date': answer_item['creation_date'],
+                            'score': answer_item['score'],
+                            'body': answer_item['body_markdown'],
+                            'comments': comments_collection
+                        }
+                        answers_collection.append(new_answer)
+                        comments_collection = []  # Comment array has been cleared for the next set of answers
 
   #  votesDataitem = votes_data['items'][0]['answers']  # [0]['comments'][0]
 
-    return render_template('test.html', data=questions_collection)
+    return render_template('test.html', data=answers_collection)
 
 
 @ app.route('/')
