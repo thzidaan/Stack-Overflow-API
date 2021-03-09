@@ -83,16 +83,10 @@ def search():
             all_data = request_item.get('items')
             print('AllDataDone')
             for item_list in range(len(request_item['items'])):
-                print('Done Item Loop' + str(item_list))
-                current_question = request_item['items'][item_list]
-                print('got current question asked')
-                new_question = ({
-                    'title': current_question['title'],
-                    'creation_date': current_question['creation_date']
-                })
-                questions_collection.append(new_question)
-                print('got current question got')
-            # if (all_data[item_list].get('answers')) is not None:
+                print('got in loop' + str(item_list))
+
+                if ((request_item.get('items')[item_list]).get('answers')) is not None:
+                    print('got all data' + str(item_list))
             # # We get all the answers for the current question
             # all_answers_data = all_data[item_list]['answers']
             # for answer_list in range(len(all_answers_data)):
