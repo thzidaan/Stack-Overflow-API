@@ -26,28 +26,6 @@ most_voted_endpoint = '?pagesize=10&fromdate=' + week_earlier_time + \
 most_recent_endpoint = '?pagesize=10&order=desc&sort=creation&site=stackoverflow&filter=!0VdjgcAdM-31Pt4LHr5ojF5Bm&tagged='
 
 
-# comment = {
-#     'creation_data': '',
-#     'score': '',
-#     'body': ''
-# }
-# answer = {
-#     'creation_data': '',
-#     'score': '',
-#     'body': '',
-#     'comments': comments_collection
-# }
-
-# question = {
-#     'title': '',
-#     'score': '',
-#     'creation_date': '',
-#     'body': '',
-#     'comments': comments_collection,
-#     'answers': answers_collection
-# }
-
-
 @app.route('/search', methods=['POST'])
 def search():
 
@@ -63,14 +41,6 @@ def search():
 
     most_voted_request = requests.get(most_voted_search).json()
     most_recent_request = requests.get(most_recent_search).json()
-
-    # votes_data = json.loads(most_voted_request.content)
-    # recent_data = json.loads(most_recent_request.content)
-
-    # all_request_data = [
-    #     votes_data,
-    #     recent_data
-    # ]
 
     all_request_data = [
         most_voted_request,
@@ -147,7 +117,6 @@ def search():
                 answers_collection = []  # answer collection cleared for next question
                 # Question comment collection freed for next question
                 question_comment_collection = []
-  #  votesDataitem = votes_data['items'][0]['answers']  # [0]['comments'][0]
 
     return render_template('test.html', data=questions_collection)
 
