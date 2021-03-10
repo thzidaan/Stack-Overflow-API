@@ -34,14 +34,37 @@
 
 
 <div class="container">
-  {% for question_number,content in data.items() %}
+  {% for question in data %}
   <br>
-  <button type="button" class="collapsible">{{content['title']}} Score:{{content['score']}}  Date Created: {{content['creation_date']}}</button>
+  <button type="button" class="collapsible">{{question['title']}} Score:{{question['score']}}  Date Created: {{question['creation_date']}}</button>
     <div class="content">
-      <p>{{content['comments']}}</p>
+      <p>{{question['body']}}</p>
+      <br>
+      <h4>Question Comments</h4>
+      {% for question_comment_data in question['comments']  %}
+      
+      <div class='question_comment_content'>{{question_comment_data['creation_date']}}</div>
+      
+      {% endfor %} 
+      <br>
+
+      <h2>Answers: </h2>
+      {% for answer_data in question['answers']  %}
+      <h4>New Answer</h4>
+      <div class='answer_content'>{{answer_data['creation_date']}}</div>
+            
+            {% for answer_comment_data in answer_data['comments']  %}
+            <h4>Comment for new Answer:</h4>
+            <div class='answer_comment_content'>{{answer_comment_data['creation_date']}}</div>
+            
+            
+            {% endfor %} 
+            
+      
+      {% endfor %} 
     </div>
   <br>
-    
+
 
   {% endfor %} 
     <script>

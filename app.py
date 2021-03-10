@@ -112,6 +112,7 @@ def search():
                     'title': question_item['title'],
                     'score': question_item['score'],
                     'creation_date': question_item['creation_date'],
+                    'body': question_item['body_markdown'],
                     'comments': question_comment_collection,
                     'answers': answers_collection
                 }
@@ -122,7 +123,7 @@ def search():
 
     end_time = time.perf_counter()
     performance_time = end_time - start_time
-    return render_template('test.html', data=questions_collection, response_time=performance_time)
+    return render_template('search.html', data=questions_collection, response_time=performance_time)
 
 
 @ app.route('/')
