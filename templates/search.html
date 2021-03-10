@@ -51,11 +51,22 @@
       <h2>Answers: </h2>
       {% for answer_data in question['answers']  %}
       <h4>New Answer</h4>
-      <div class='answer_content'>{{answer_data['creation_date']}}</div>
+      <div class='answer_content'>
+        <p>Answer Created On: {{answer_data['creation_date']}}</p>
+        <p>Score: {{answer_data['score']}}</p>
+        <p>{{answer_data['body']}}</p>
+        
+        
+      </div>
+            <h5>Answer Comments</h5>
             
             {% for answer_comment_data in answer_data['comments']  %}
-            <h4>Comment for new Answer:</h4>
-            <div class='answer_comment_content'>{{answer_comment_data['creation_date']}}</div>
+            <div class='answer_comment_content'>
+              <p>Created on :{{answer_comment_data['creation_date']}}</p>
+              <p>Score: {{answer_comment_data['score']}}</p>
+              <p>{{answer_comment_data['body']}}</p>
+              
+            </div>
             
             
             {% endfor %} 
