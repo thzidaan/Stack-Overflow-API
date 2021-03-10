@@ -43,7 +43,14 @@
       <h4>Question Comments</h4>
       {% for question_comment_data in question['comments']  %}
       
-      <div class='question_comment_content'>{{question_comment_data['creation_date']}}</div>
+      <div class='question_comment_content'>
+        <p>Created on: {{question_comment_data['creation_date']}}</p>
+        <p>Score: {{question_comment_data['score']}}</p>
+        <p>{{question_comment_data['body']}}</p>
+        <br>
+        
+
+      </div>
       
       {% endfor %} 
       <br>
