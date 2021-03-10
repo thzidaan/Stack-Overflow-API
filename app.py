@@ -2,6 +2,7 @@ from flask import Flask, json, render_template, request, redirect
 import requests
 import json
 import time
+from operator import itemgetter
 
 
 app = Flask(__name__)
@@ -123,7 +124,11 @@ def search():
 
     end_time = time.perf_counter()
     performance_time = end_time - start_time
-    return render_template('search.html', data=questions_collection, response_time=performance_time)
+
+    sorted_question_collection = sorted(
+        questions_collection, key=itemgetter('creation_date'), reverse=True)
+
+    return render_template('search.html', data=sorted_question_collection, response_time=performance_time)
 
 
 @ app.route('/')
