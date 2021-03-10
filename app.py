@@ -29,6 +29,8 @@ most_recent_endpoint = '?pagesize=10&order=desc&sort=creation&site=stackoverflow
 @app.route('/search', methods=['POST'])
 def search():
 
+    start_time = time.perf_counter()
+
     tag_selected = request.form["tag"]
 
     comments_collection = []
@@ -118,7 +120,9 @@ def search():
                 # Question comment collection freed for next question
                 question_comment_collection = []
 
-    return render_template('test.html', data=questions_collection)
+    end_time = time.perf_counter()
+    performance_time = end_time - start_time
+    return render_template('test.html', data=questions_collection, response_time=performance_time)
 
 
 @ app.route('/')
