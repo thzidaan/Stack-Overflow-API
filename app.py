@@ -56,6 +56,7 @@ def search():
     comments_collection = []
     answers_collection = []
     questions_collection = []
+    question_comment_collection = []
 
     most_voted_search = search_base_endpoint + most_voted_endpoint + tag_selected
     most_recent_search = search_base_endpoint + most_recent_endpoint + tag_selected
@@ -119,10 +120,36 @@ def search():
                         }
                         answers_collection.append(new_answer)
                         comments_collection = []  # Comment array has been cleared for the next set of answers
+                # If the question has comments
+                if ((request_item.get('items')[item_list]).get('comments')) is not None:
+                    all_question_comment_data = (
+                        (request_item.get('items')[item_list]).get('comments'))
+                    for question_comment_list in range(len(all_question_comment_data)):
+                        question_comment_item = all_question_comment_data[question_comment_list]
 
+                        new_question_comment_item = {
+                            'creation_date': question_comment_item['creation_date'],
+                            'score': question_comment_item['score'],
+                            'body': question_comment_item['body_markdown']
+                        }
+                        question_comment_collection.append(
+                            new_question_comment_item)
+
+                question_item = (request_item.get('items')[item_list])
+                new_question = {
+                    'title': question_item['title'],
+                    'score': question_item['score'],
+                    'creation_date': question_item['creation_date'],
+                    'comments': question_comment_collection,
+                    'answers': answers_collection
+                }
+                questions_collection.append(new_question)
+                answers_collection = []  # answer collection cleared for next question
+                # Question comment collection freed for next question
+                question_comment_collection = []
   #  votesDataitem = votes_data['items'][0]['answers']  # [0]['comments'][0]
 
-    return render_template('test.html', data=answers_collection)
+    return render_template('test.html', data=questions_collection)
 
 
 @ app.route('/')
