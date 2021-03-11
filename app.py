@@ -91,6 +91,8 @@ def search():
                                     'body': answer_comment_item['body_markdown']
                                 }
                                 comments_collection.append(new_comment)
+                            comments_collection = sorted(
+                                comments_collection, key=itemgetter('score'), reverse=True)  # Answer_comments get sorted by Score
 
                         new_answer = {
                             'creation_date': time_converter(answer_item['creation_date']),
@@ -116,6 +118,9 @@ def search():
                         }
                         question_comment_collection.append(
                             new_question_comment_item)
+
+                    question_comment_collection = sorted(
+                        question_comment_collection, key=itemgetter('score'), reverse=True)  # Question comments get sorted by votes
 
                 question_item = (request_item.get('items')[item_list])
                 new_question = {
