@@ -63,7 +63,7 @@
 <div class="container" style="font-family: Roboto,sans-serif">
   {% for question in data %}
   <br>
-  <button type="button" class="collapsible">{{question['title']}} Score:{{question['score']}}  Date Created: {{question['creation_date']}}</button>
+  <button type="button" class="collapsible" style="display: flex; flex-direction: row; justify-content: space-between;position: relative;padding: 7px;"><p>{{question['title']}} </p><p style="position: absolute; margin-left: 900px;">Score: {{question['score']}} </p><p>Date Created: {{question['creation_date']}}</p> </button>
     <div class="content">
       <p>{{question['body']}}</p>
       <br>
@@ -126,7 +126,7 @@
       {% endfor %} 
       {% endif %}
     </div>
-  <br>
+  
 
 
   {% endfor %} 
