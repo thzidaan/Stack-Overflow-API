@@ -1,8 +1,8 @@
-from flask import Flask, json, render_template, request, redirect
+from flask import Flask, json, render_template, request
 import requests
-import json
 import time
 from operator import itemgetter
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -25,6 +25,15 @@ search_base_endpoint = 'https://api.stackexchange.com/2.2/search'
 most_voted_endpoint = '?pagesize=10&fromdate=' + week_earlier_time + \
     '&order=desc&sort=votes&site=stackoverflow&filter=!0VdjgcAdM-31Pt4LHr5ojF5Bm&tagged='
 most_recent_endpoint = '?pagesize=10&order=desc&sort=creation&site=stackoverflow&filter=!0VdjgcAdM-31Pt4LHr5ojF5Bm&tagged='
+
+
+def time_converter(UNIX_Time):
+    given_time = int(UNIX_Time)
+
+    readable_date = datetime.utcfromtimestamp(
+        given_time).strftime('%Y-%m-%d %H:%M:%S')
+
+    return readable_date
 
 
 @app.route('/search', methods=['POST'])
@@ -77,14 +86,14 @@ def search():
                                 # Taking each comment from answers
                                 answer_comment_item = answer_item_comments[answer_comment_list]
                                 new_comment = {
-                                    'creation_date': answer_comment_item['creation_date'],
+                                    'creation_date': time_converter(answer_comment_item['creation_date']),
                                     'score': answer_comment_item['score'],
                                     'body': answer_comment_item['body_markdown']
                                 }
                                 comments_collection.append(new_comment)
 
                         new_answer = {
-                            'creation_date': answer_item['creation_date'],
+                            'creation_date': time_converter(answer_item['creation_date']),
                             'score': answer_item['score'],
                             'body': answer_item['body_markdown'],
                             'comments': comments_collection
@@ -99,7 +108,7 @@ def search():
                         question_comment_item = all_question_comment_data[question_comment_list]
 
                         new_question_comment_item = {
-                            'creation_date': question_comment_item['creation_date'],
+                            'creation_date': time_converter(question_comment_item['creation_date']),
                             'score': question_comment_item['score'],
                             'body': question_comment_item['body_markdown']
                         }
@@ -110,7 +119,7 @@ def search():
                 new_question = {
                     'title': question_item['title'],
                     'score': question_item['score'],
-                    'creation_date': question_item['creation_date'],
+                    'creation_date': time_converter(question_item['creation_date']),
                     'body': question_item['body_markdown'],
                     'comments': question_comment_collection,
                     'answers': answers_collection
