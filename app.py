@@ -51,24 +51,22 @@ def search():
     ]
 
     for request_item in all_request_data:
-        print('requesstNOTDone')
+
         if request_item.get('items') is not None:
-            print('requesstDone')
+
             all_data = request_item.get('items')
-            print('AllDataDone')
+
             for item_list in range(len(request_item['items'])):
-                print('got in loop' + str(item_list))
 
                 if ((request_item.get('items')[item_list]).get('answers')) is not None:
-                    print('got all answer data' + str(item_list))
+
                     # We get all the answers for the current question
                     all_answers_data = (
                         (request_item.get('items')[item_list]).get('answers'))
                     for answer_list in range(len(all_answers_data)):
 
-                        print('answer data' + str(answer_list))
                         answer_item = all_answers_data[answer_list]
-                        print('answerItem gotten')
+
                         # If answer also have comments
                         if (((
                                 (request_item.get('items')[item_list]).get('answers'))[answer_list]).get('comments')) is not None:
