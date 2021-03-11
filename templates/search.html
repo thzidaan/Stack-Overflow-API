@@ -13,7 +13,8 @@
   }
 
 .title_container {
-  margin-left: 450px;
+  margin-top: 5px;
+  margin-left: 350px;
 }
   .collapsible {
     background-color: #777;
@@ -76,7 +77,7 @@
 
 
 
-<div class="container" style="font-family: Roboto,sans-serif; margin-left: 15px; margin-right: 15px;">
+<div class="container" style="font-family: Roboto,sans-serif;width: 110%;">
 
   <div class="title_container">
   <div class="title">
@@ -87,13 +88,14 @@
 
   {% for question in data %}
   <br>
-  <button type="button" class="collapsible" style="display: flex; flex-direction: row; justify-content: space-between;position: relative;padding: 7px;"><p>{{question['title']}} </p><p style="position: absolute; margin-left: 900px;">Score: {{question['score']}} </p><p>Date Created: {{question['creation_date']}}</p> </button>
+  <button type="button" class="collapsible" style="display: flex; flex-direction: row; justify-content: space-between;position: relative;"><p style="width: 60%;">{{question['title']}} </p><p style="position: absolute; margin-left: 700px;">Score: {{question['score']}} </p><p>Date Created: {{question['creation_date']}}</p> </button>
     <div class="content">
+      <br>
       <p>{{question['body']}}</p>
       <br>
 
       {% if question['comments'] %}
-      <h4>Comments</h4>
+      <div class="font-size: 10px"><strong>Comments:</strong></div>
       {% for question_comment_data in question['comments']  %}
       
       <div class='question_comment_content'>
@@ -111,7 +113,7 @@
 
       {% if question['answers'] %}
 
-      <h2>Answers: </h2>
+      <div class="font-size: 12px"><strong>Answers:</strong></div>
       {% for answer_data in question['answers']  %}
 
       <div class='answer_content'>
