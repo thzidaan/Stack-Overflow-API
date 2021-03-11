@@ -126,7 +126,7 @@ def search():
     sorted_question_collection = sorted(
         questions_collection, key=itemgetter('creation_date'), reverse=True)
 
-    return render_template('search.html', data=sorted_question_collection, response_time=performance_time)
+    return render_template('search.html', data=sorted_question_collection, response_time=performance_time,tagged=tag_selected)
 
 
 @ app.route('/')
