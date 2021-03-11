@@ -84,7 +84,7 @@
 
       <h2>Answers: </h2>
       {% for answer_data in question['answers']  %}
-      <h4>New Answer</h4>
+
       <div class='answer_content'>
         <p>Answer Created On: {{answer_data['creation_date']}}</p>
         <p>Score: {{answer_data['score']}}</p>
@@ -92,7 +92,7 @@
         
         
       </div>
-            <h5>Answer Comments</h5>
+
 
             <button type="button" class="collapsible" style="width: 90%; margin-left: 40px;">Comments</button>
             <div class="content">
@@ -107,6 +107,9 @@
                         
               {% endfor %} 
             </div>
+
+          <br>
+          <br>
             
 
             
