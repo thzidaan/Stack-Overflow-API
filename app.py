@@ -27,7 +27,7 @@ most_voted_endpoint = '?pagesize=10&fromdate=' + week_earlier_time + \
 most_recent_endpoint = '?pagesize=10&order=desc&sort=creation&site=stackoverflow&filter=!0VdjgcAdM-31Pt4LHr5ojF5Bm&tagged='
 
 
-def time_converter(UNIX_Time):
+def time_converter(UNIX_Time):  # Helps convert the time got from the API Call
     given_time = int(UNIX_Time)
 
     readable_date = datetime.utcfromtimestamp(
@@ -100,6 +100,8 @@ def search():
                         }
                         answers_collection.append(new_answer)
                         comments_collection = []  # Comment array has been cleared for the next set of answers
+                    answers_collection = sorted(
+                        answers_collection, key=itemgetter('score'), reverse=True)  # Answers gets sorted by votes
                 # If the question has comments
                 if ((request_item.get('items')[item_list]).get('comments')) is not None:
                     all_question_comment_data = (
