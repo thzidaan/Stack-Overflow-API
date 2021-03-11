@@ -67,6 +67,8 @@
     <div class="content">
       <p>{{question['body']}}</p>
       <br>
+
+      {% if question['comments'] %}
       <h4>Question Comments</h4>
       {% for question_comment_data in question['comments']  %}
       
@@ -81,6 +83,9 @@
       
       {% endfor %} 
       <br>
+      {% endif %}
+
+      {% if question['answers'] %}
 
       <h2>Answers: </h2>
       {% for answer_data in question['answers']  %}
@@ -92,6 +97,8 @@
         
         
       </div>
+
+            {% if answer_data['comments'] %}
 
 
             <button type="button" class="collapsible" style="width: 90%; margin-left: 40px;">Comments</button>
@@ -106,7 +113,9 @@
               </div>
                         
               {% endfor %} 
+              
             </div>
+            {% endif %}
 
           <br>
           <br>
@@ -115,6 +124,7 @@
             
       
       {% endfor %} 
+      {% endif %}
     </div>
   <br>
 
