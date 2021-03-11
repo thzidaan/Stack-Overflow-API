@@ -2,13 +2,69 @@
 
 <title>Home</title>
 
+<style>
+  .home_page_content {
+    margin-left: 65px;
+    margin-top: 30px;
+  }
+  .home_page_title {
+    justify-content: center;
+    background-color: #003366;
+    height: 130px;
+    width: 450px;
+    position: absolute;
+    margin-top: 50px;
+    border-radius: 10px;
+  }
+  .home_page {
+    margin-left: 250px;
+    margin-top: 200px;
+
+    background-color: #003153;
+    width: 600px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 300px;
+    border-radius: 7px;
+  }
+
+  .home_form {
+    display: flex;
+    align-items: center;
+    margin-top: 150px;
+  }
+</style>
+
 {% endblock %} {% block body %}
 
 <br />
-
-<form method="POST" action="/search">
-  Tag Search <input type="text" name="tag" />
-  <input role="button" class="btn btn-primary" type="submit" />
-</form>
-
-<span>{{data}}</span>{% endblock %}
+<div class="container">
+  <div class="home_page">
+    <div class="home_page_title">
+      <div class="home_page_content">
+        <span style="font-size: larger; color: #e6eeff"
+          >Welcome to StackOverflow Crawler!!</span
+        >
+        <p style="font-size: medium; color: #e6eeff; margin-left: 45px">
+          (COMP 4350 - Assignment 1)
+        </p>
+        <p style="font-size: 10px; color: #e6eeff">
+          Search to get the top voted and recent tagged posts over the past week
+        </p>
+      </div>
+    </div>
+    <form class="home_form" method="POST" action="/search">
+      <input type="text" name="tag" placeholder="Search Tags" />
+      <input
+        role="button"
+        class="btn btn-primary"
+        type="submit"
+        value="Search"
+        style="margin-left: 5px"
+      />
+    </form>
+  </div>
+</div>
+<p style="margin-top: 270px">Created By: Tahmidul Hasnain Zidaan&#169; 2021</p>
+{% endblock %}
