@@ -2,7 +2,7 @@
 
 <style>
   .title {
-    background-color:	#F8F8F8;
+    background-color:	#B3CCFF;
     width:550px;
     padding: 3px;
     padding-left: 2px;
@@ -18,7 +18,7 @@
   margin-left: 280px;
 }
   .collapsible {
-    background-color: #4682B4;
+    background-color: #004080;
     color: white;
     cursor: pointer;
     padding: 15px;
@@ -85,11 +85,12 @@
     <h2> Search Results for Tag: {{tagged}}  </h2>
   </div>
   </div>
+  <hr>
   
 
   {% for question in data %}
   <br>
-  <button type="button" class="collapsible" style="display: flex; flex-direction: row; justify-content: space-between;position: relative;"><p style="width: 60%;">{{question['title']}} </p><p style="position: absolute; margin-left: 700px;">Score: {{question['score']}} </p><p>Date Created: {{question['creation_date']}}</p> </button>
+  <button type="button" class="collapsible" style="display: flex; flex-direction: row; justify-content: space-between;position: relative;color: #e6eeff"><p style="width: 60%;">{{question['title']}} </p><p style="position: absolute; margin-left: 700px;">Score: {{question['score']}} </p><p>Date Created: {{question['creation_date']}}</p> </button>
     <div class="content">
       <br>
       <p>{{question['body']}}</p>
