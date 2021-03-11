@@ -70,7 +70,7 @@ def search():
                         # If answer also have comments
                         if (((
                                 (request_item.get('items')[item_list]).get('answers'))[answer_list]).get('comments')) is not None:
-                            print('answer comments done')
+
                             answer_item_comments = (((
                                 (request_item.get('items')[item_list]).get('answers'))[answer_list]).get('comments'))
                             for answer_comment_list in range(len(answer_item_comments)):
@@ -126,7 +126,7 @@ def search():
     sorted_question_collection = sorted(
         questions_collection, key=itemgetter('creation_date'), reverse=True)
 
-    return render_template('search.html', data=sorted_question_collection, response_time=performance_time,tagged=tag_selected)
+    return render_template('search.html', data=sorted_question_collection, response_time=performance_time, tagged=tag_selected)
 
 
 @ app.route('/')

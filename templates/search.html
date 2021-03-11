@@ -1,6 +1,20 @@
 {% extends 'base.html'%} {% block head %}
 
 <style>
+  .title {
+    background-color:	#F8F8F8;
+    width:450px;
+    padding: 3px;
+    padding-left: 2px;
+    padding-bottom: 2px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+  }
+
+.title_container {
+  margin-left: 450px;
+}
   .collapsible {
     background-color: #777;
     color: white;
@@ -11,6 +25,7 @@
     text-align: left;
     outline: none;
     font-size: 15px;
+    border-radius: 5px;
   }
   
   .active, .collapsible:hover {
@@ -22,6 +37,7 @@
     display: none;
     overflow: hidden;
     background-color: #f1f1f1;
+    border-radius: 5px;
   }
   .answer_comment_content {
     background: #dddddd;
@@ -56,11 +72,19 @@
 
 {% endblock %} {% block body %}
 
-<h1>Search Results for Tag: {{tagged}} </h1> 
 
 
 
-<div class="container" style="font-family: Roboto,sans-serif">
+
+<div class="container" style="font-family: Roboto,sans-serif; margin-left: 15px; margin-right: 15px;">
+
+  <div class="title_container">
+  <div class="title">
+    <h2> Search Results for Tag: {{tagged}}  </h2>
+  </div>
+  </div>
+  
+
   {% for question in data %}
   <br>
   <button type="button" class="collapsible" style="display: flex; flex-direction: row; justify-content: space-between;position: relative;padding: 7px;"><p>{{question['title']}} </p><p style="position: absolute; margin-left: 900px;">Score: {{question['score']}} </p><p>Date Created: {{question['creation_date']}}</p> </button>
@@ -69,7 +93,7 @@
       <br>
 
       {% if question['comments'] %}
-      <h4>Question Comments</h4>
+      <h4>Comments</h4>
       {% for question_comment_data in question['comments']  %}
       
       <div class='question_comment_content'>
@@ -91,7 +115,7 @@
       {% for answer_data in question['answers']  %}
 
       <div class='answer_content'>
-        <p>Answer Created On: {{answer_data['creation_date']}}</p>
+        <p>Created On: {{answer_data['creation_date']}}</p>
         <p>Score: {{answer_data['score']}}</p>
         <p>{{answer_data['body']}}</p>
         
