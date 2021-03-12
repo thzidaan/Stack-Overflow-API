@@ -120,7 +120,7 @@
   <button type="button" class="collapsible" style="display: flex; flex-direction: row; justify-content: space-between;position: relative;color: #e6eeff"><p style="width: 60%;">{{question['title']}} </p><p style="position: absolute; margin-left: 700px;">Score: {{question['score']}} </p><p>Date Created: {{question['creation_date']}}</p> </button>
     <div class="content">
       <br>
-      <p>{{question['body']}}</p>
+      <p>{{question['body']|markdown}}</p>
       <br>
 
       {% if question['comments'] %}
@@ -130,7 +130,7 @@
       <div class='question_comment_content'>
         <p>Created on: {{question_comment_data['creation_date']}}</p>
         <p>Score: {{question_comment_data['score']}}</p>
-        <p>{{question_comment_data['body']}}</p>
+        <p>{{question_comment_data['body']|markdown}}</p>
         <br>
         
 
@@ -148,7 +148,7 @@
       <div class='answer_content'>
         <p>Created On: {{answer_data['creation_date']}}</p>
         <p>Score: {{answer_data['score']}}</p>
-        <p>{{answer_data['body']}}</p>
+        <p>{{answer_data['body']|markdown}}</p>
         
         
       </div>
@@ -163,7 +163,7 @@
               <div class='answer_comment_content'>
                 <p>Created on :{{answer_comment_data['creation_date']}}</p>
                 <p>Score: {{answer_comment_data['score']}}</p>
-                <p>{{answer_comment_data['body']}}</p>
+                <p>{{answer_comment_data['body']|markdown}}</p>
                 
               </div>
                         

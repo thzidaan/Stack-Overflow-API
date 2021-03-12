@@ -3,9 +3,11 @@ import requests
 import time
 from operator import itemgetter
 from datetime import datetime
+from flaskext.markdown import Markdown
 
 
 app = Flask(__name__)
+Markdown(app)
 
 # (1615523017 - 1614918217) (i.e March 11 - March 4 ==> 1 week)
 seven_days_time = 604800
