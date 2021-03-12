@@ -2,7 +2,7 @@
 
 This is a web application that is used to retrieve the top 10 most voted and recent posts for tagged keywords from the popular website StackOverflow using their API.
 
-## The Web Application is avaibale in as a Docker Image in Dockerhub
+### The Web Application is available as a Docker Image in Dockerhub
 
 To retrieve the docker image, run the following in your terminal
 ```python
