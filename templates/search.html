@@ -1,11 +1,27 @@
 {% extends 'base.html'%} {% block head %}
 
 <style>
+  .title_button{
+    margin-left: 990px;
+    position: absolute;
+  }
+
+  .btn-primary {
+    color: #e6eeff;
+    background-color: #004080 !important;
+    border-radius: 6px !important;
+
+  }
+
+  .btn-primary:hover:active{
+    background-color: #003153 !important;
+  }
+
   .title {
     background-color:	#B3CCFF;
-    width:550px;
-    padding: 3px;
-    padding-left: 2px;
+    width:max-content;
+    padding: 10px;
+    padding-left: 5px;
     padding-bottom: 2px;
     padding-top: 7px;
     border-radius: 8px;
@@ -14,8 +30,11 @@
   }
 
 .title_container {
-  margin-top: 20px;
-  margin-left: 280px;
+  margin-top: 30px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
   .collapsible {
     background-color: #004080;
@@ -82,8 +101,16 @@
 
   <div class="title_container">
   <div class="title">
-    <h2> Search Results for Tag: {{tagged}}  </h2>
+    <div> Search Results for Tag: {{tagged}}  </div>
   </div>
+  <form class="title_button" action="/">
+
+    <input role="button" type="submit" class="btn btn-primary" value="Go Back"></input>
+
+  </form>
+
+
+
   </div>
   <hr>
   
