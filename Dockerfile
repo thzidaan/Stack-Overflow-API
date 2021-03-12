@@ -7,8 +7,7 @@ WORKDIR /app
 COPY . /app
 
 RUN pip3 install -r requirements.txt
-RUN pip3 install gunicorn
 
 
 ENTRYPOINT [ "gunicorn" ]
-CMD ["-b :8080","app:app"]
+CMD ["-b :80","app:app"]
