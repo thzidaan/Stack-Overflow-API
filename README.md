@@ -12,7 +12,7 @@ To run the docker image, run the following
 ```python
 docker run -d -p 80:80 zidaan/stack-overflow-api
 ```
-The Web application is now ready to use. Please use the following links to use the application.
-```python
+The Web Application is now ready to use. Please use the following links to use the application.
+```
 http://localhost:80 or http://127.0.0.1:80
 ```
