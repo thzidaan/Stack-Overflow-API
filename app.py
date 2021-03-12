@@ -1,4 +1,4 @@
-from flask import Flask, json, render_template, request
+from flask import Flask, render_template, request
 import requests
 import time
 from operator import itemgetter
@@ -15,16 +15,13 @@ week_earlier_time = str(current_Time - seven_days_time)
 
 # post_id == question_id --> Remember
 # Use Search API
-
-post_endpoint = 'https://api.stackexchange.com/2.2/posts'  # Will be used for comments
-question_endpoint = 'https://api.stackexchange.com/2.2/questions'
-
 search_base_endpoint = 'https://api.stackexchange.com/2.2/search'
 
 
 most_voted_endpoint = '?pagesize=10&fromdate=' + week_earlier_time + \
     '&order=desc&sort=votes&site=stackoverflow&filter=!0VdjgcAdM-31Pt4LHr5ojF5Bm&tagged='
-most_recent_endpoint = '?pagesize=10&order=desc&sort=creation&site=stackoverflow&filter=!0VdjgcAdM-31Pt4LHr5ojF5Bm&tagged='
+most_recent_endpoint = '?pagesize=10&fromdate=' + week_earlier_time + \
+    '&order=desc&sort=creation&site=stackoverflow&filter=!0VdjgcAdM-31Pt4LHr5ojF5Bm&tagged='
 
 
 def time_converter(UNIX_Time):  # Helps convert the time got from the API Call
@@ -41,9 +38,9 @@ def search():
 
     start_time = time.perf_counter()
 
-    tag_selected = request.form["tag"]
+    tag_selected = request.form["tag"]  # Gets Tag from input
 
-    comments_collection = []
+    comments_collection = []  # Arrays to collect information for the response
     answers_collection = []
     questions_collection = []
     question_comment_collection = []
@@ -151,4 +148,4 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
