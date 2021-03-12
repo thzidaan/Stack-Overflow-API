@@ -26,6 +26,9 @@ git clone https://github.com/thzidaan/Stack-Overflow-API
 cd Stack-Overflow-API
 ```
 ```
+pip3 install -r requirements.txt
+```
+```
 python3 app.py
 ```
 
