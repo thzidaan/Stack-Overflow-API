@@ -1,6 +1,21 @@
 {% extends 'base.html'%} {% block head %}
 
 <style>
+
+  .sorted_posts {
+    background-color:	#B3CCFF;
+    width:max-content;
+    padding: 10px;
+    padding-left: 5px;
+    padding-bottom: 2px;
+    padding-top: 7px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    margin-left: 3px;
+
+
+  }
   .title_button{
     margin-left: 990px;
     position: absolute;
@@ -102,6 +117,9 @@
   <div class="title_container">
   <div class="title">
     <div> Search Results for Tag: {{tagged}}  </div>
+  </div>
+  <div class="sorted_posts">
+    <div>Sorted By: Creation Date </div>
   </div>
   <form class="title_button" action="/">
 
