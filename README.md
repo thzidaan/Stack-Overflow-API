@@ -16,7 +16,7 @@ The Web Application is now ready to use. Please use the following links to use t
 ```
 http://localhost:80 or http://127.0.0.1:80
 ```
-### The Application can also be built using the given source code in this repository.
+### Run the Application without Docker
 Run the following in your terminal
 
 ```
